@@ -3,32 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 3</title>
+    <title>Part 4</title>
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
-    <!-- CARA 1 -->
+    <!-- vo -->
     <div id="app">
-        {{ nama }} - {{ umur }}
-        <div v-html="raw"></div>
-        {{ nama + " Ramadhan"}}
-        <br>
-        {{ laki ? 'dia laki-laki' : 'dia perempuan'}}
-        <br>
-        {{ nama.split('').reverse().join('') }}
+        a {{ a }} - b {{ b }}
     </div>
 
     <script>
-        Vue.config.productionTip = false
         var vo = new Vue({
             el : '#app',
             data : {
+                a : 1
+            },
+            computed : {
+                b : function(){
+                    return this.a+3;
+                }
+            }
+        });
+    </script>
+
+    <!-- vo2 -->
+    <div id="app2">
+        biodata {{ biodata }}
+    </div>
+
+    <script>
+        var vo2 = new Vue({
+            el : '#app2',
+            data : {
                 nama : "Zein",
-                umur : 100,
-                raw : "<p><b>bisa gak nih!</b></p>",
-                laki : false
+                umur : 23
+            },
+            computed : {
+                biodata : function(){
+                    return this.nama + " " + this.umur;
+                }
+            }
+        });
+    </script>
+
+    <!-- vo3 -->
+    
+    <div id="app3">
+        biodata3 {{ biodata3 }}
+    </div>
+
+    <script>
+        var vo3 = new Vue({
+            el : '#app3',
+            data : {
+                nama : "Zein",
+                umur : 23
+            },
+            computed : {
+                biodata3 : {
+                    get : function(){
+                        return this.nama +" "+ this.umur;
+                    },
+                    set : function(params){
+                        var temp = params.split(" ");
+                        this.nama = temp[0];
+                        this.umur = temp[1];
+                    }
+                }
             }
         });
     </script>
@@ -36,6 +79,8 @@
 </html>
 
 <!-- 
-    1. penggunaan bintang adalah pendeklarasian final vairable yang tidak bisa diganti dengan console
-    2. 
+    1. nilai b tergatung nilai b
+    2. coba ketik di cosole vo.a = 4 nilai a akan berubah
+    3. kita juga bsa terapkan di string 
+    4. kita juga bsa set parameter dengan contoh vo3
 -->
