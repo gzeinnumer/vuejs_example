@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 5 - Loop List Directives</title>
+    <title>Part 6 - List Methods</title>
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
@@ -12,13 +12,8 @@
     <!-- CARA 1 -->
     <div id="app">
         <ul>
-            <li v-for="d in members">
+            <li v-for="d in members" track-by="id">
                 {{ d.nama }} - {{ d.umur}}
-            </li>
-        </ul>
-        <ul>
-            <li v-for="i in 5">
-                {{ i }}
             </li>
         </ul>
     </div>
@@ -29,30 +24,10 @@
             el : '#app',
             data : {
                 members : [
-                    { nama : "M", umur : 23 },
-                    { nama : "Fadli", umur : 24 },
-                    { nama : "Zein", umur : 25 },
+                    { id: 1, nama : "M", umur : 23 },
+                    { id: 2, nama : "Fadli", umur : 24 },
+                    { id: 3, nama : "Zein", umur : 25 },
                 ]
-            }
-        });
-    </script>
-    
-
-    <!-- CARA 2 -->
-    <div id="app2">
-        <ul>
-            <li v-for="( d, keys ) in members2">
-                {{ d }} - {{ keys }}
-            </li>
-        </ul>
-    </div>
-
-    <script>
-        Vue.config.productionTip = false
-        var vo = new Vue({
-            el : '#app2',
-            data : {
-                members2 : { nama : "M", umur : 23, bahasa : "indonesia" }
             }
         });
     </script>
@@ -60,5 +35,11 @@
 </html>
 
 <!-- 
+    MUTATING -> MENGUBAH OBJECT ASLI
+    PUSH, POP, SHIFT, UNSHIFT
+    NON MUTATING -> TIDAK MENGUBAH OBJECT ASLI
+    FILTER, CONCAT, SLICE
 
- -->
+    1. COBA vo.members.push({ nama : "testing", umur : 12})
+    nb. cari tau tentang trackby
+-->
