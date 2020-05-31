@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 4 - Conditional Directives</title>
+    <title>Part 5 - Loop List Directives</title>
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
@@ -11,21 +11,16 @@
 
     <!-- CARA 1 -->
     <div id="app">
-        {{ nama }}
-        <div v-if="done_if">
-            {{ umur }}
-        </div>
-        <div v-else>
-            silahkan aktifkan dulu variable donenya jadi true
-        </div>
-
-        <div v-show="done_show">
-            {{ umur }}
-        </div>
-
-        <div v-show="this.umur > 10">
-            umur lebih dari 10 tahun {{ umur }}
-        </div>
+        <ul>
+            <li v-for="d in members">
+                {{ d.nama }} - {{ d.umur}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="i in 5">
+                {{ i }}
+            </li>
+        </ul>
     </div>
 
     <script>
@@ -33,12 +28,31 @@
         var vo = new Vue({
             el : '#app',
             data : {
-                nama : "Zein",
-                umur : 100,
-                raw : "<p><b>bisa gak nih!</b></p>",
-                laki : false,
-                done_if : false,
-                done_show : true
+                members : [
+                    { nama : "M", umur : 23 },
+                    { nama : "Fadli", umur : 24 },
+                    { nama : "Zein", umur : 25 },
+                ]
+            }
+        });
+    </script>
+    
+
+    <!-- CARA 2 -->
+    <div id="app2">
+        <ul>
+            <li v-for="( d, keys ) in members2">
+                {{ d }} - {{ keys }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        var vo = new Vue({
+            el : '#app2',
+            data : {
+                members2 : { nama : "M", umur : 23, bahasa : "indonesia" }
             }
         });
     </script>
@@ -46,7 +60,5 @@
 </html>
 
 <!-- 
-    1. if -> jika tidak lulus if, maka html benar2 hilang tidak bsa di inspect
-    2. show -> jika tidak lulus if, hanyakan menambah style display non, dan ttp bisa di inspeck 
 
  -->
