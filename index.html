@@ -3,40 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 7 - Menggunakan filter error</title>
+    <title>Part 8 - Method</title>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
-    <!-- CARA 1 -->
     <div id="app">
-        <ul>
-            <li v-for="d in members">
-                {{ d.nama }} - {{ d.umur}}
-            </li>
-        </ul>
+        <button v-on:click="onBtnClicked">Button1</button>
+        <br>
+        <button v-on:click="onBtnClickedParams('pesan nih')">Button2</button>
+        <br>
+        <input type="text" v-on:keyup.13="enterAction"> <!-- 13 bisa diganti dengan enter -->
+        <!-- menhilangkan sifat reload page pada tag html kita bisa pakai v-on:click.prevent -->
+        <a href="" v-on:click.prevent="enterAction">mencegah href melakukan loading page</a>
     </div>
 
     <script>
         var vo = new Vue({
             el : '#app',
             data : {
-                members : [
-                    { nama : "M", umur : 23 },
-                    { nama : "Fadli", umur : 24 },
-                    { nama : "Zein", umur : 25 },
-                ]
-            }
+
+            },
+            methods: {
+                onBtnClicked: function(){
+                    console.log('btn clicked')
+                    alert('clicked')
+                },
+                onBtnClickedParams: function(text){
+                    console.log(text)
+                    alert(text)
+                },
+                enterAction : function(){
+                    console.log('enter ditekan')
+                    alert('enter ditekan')
+                }
+            },
         });
     </script>
 </body>
 </html>
-
-<!-- 
-    MUTATING -> MENGUBAH OBJECT ASLI
-    PUSH, POP, SHIFT, UNSHIFT
-    NON MUTATING -> TIDAK MENGUBAH OBJECT ASLI
-    FILTER, CONCAT, SLICE
-
--->
