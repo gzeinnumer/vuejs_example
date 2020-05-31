@@ -11,13 +11,21 @@
 
     <!-- CARA 1 -->
     <div id="app">
-        {{ nama }} - {{ umur }}
-        <div v-html="raw"></div>
-        {{ nama + " Ramadhan"}}
-        <br>
-        {{ laki ? 'dia laki-laki' : 'dia perempuan'}}
-        <br>
-        {{ nama.split('').reverse().join('') }}
+        {{ nama }}
+        <div v-if="done_if">
+            {{ umur }}
+        </div>
+        <div v-else>
+            silahkan aktifkan dulu variable donenya jadi true
+        </div>
+
+        <div v-show="done_show">
+            {{ umur }}
+        </div>
+
+        <div v-show="this.umur > 10">
+            umur lebih dari 10 tahun {{ umur }}
+        </div>
     </div>
 
     <script>
@@ -28,7 +36,9 @@
                 nama : "Zein",
                 umur : 100,
                 raw : "<p><b>bisa gak nih!</b></p>",
-                laki : false
+                laki : false,
+                done_if : false,
+                done_show : true
             }
         });
     </script>
@@ -36,6 +46,7 @@
 </html>
 
 <!-- 
-    1. penggunaan bintang adalah pendeklarasian final vairable yang tidak bisa diganti dengan console
-    2. 
--->
+    1. if -> jika tidak lulus if, maka html benar2 hilang tidak bsa di inspect
+    2. show -> jika tidak lulus if, hanyakan menambah style display non, dan ttp bisa di inspeck 
+
+ -->
