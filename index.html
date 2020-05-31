@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 6 - List Methods</title>
-    
+    <title>Part 7 - Menggunakan filter error</title>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
@@ -12,21 +12,20 @@
     <!-- CARA 1 -->
     <div id="app">
         <ul>
-            <li v-for="d in members" track-by="id">
+            <li v-for="d in members">
                 {{ d.nama }} - {{ d.umur}}
             </li>
         </ul>
     </div>
 
     <script>
-        Vue.config.productionTip = false
         var vo = new Vue({
             el : '#app',
             data : {
                 members : [
-                    { id: 1, nama : "M", umur : 23 },
-                    { id: 2, nama : "Fadli", umur : 24 },
-                    { id: 3, nama : "Zein", umur : 25 },
+                    { nama : "M", umur : 23 },
+                    { nama : "Fadli", umur : 24 },
+                    { nama : "Zein", umur : 25 },
                 ]
             }
         });
@@ -40,6 +39,4 @@
     NON MUTATING -> TIDAK MENGUBAH OBJECT ASLI
     FILTER, CONCAT, SLICE
 
-    1. COBA vo.members.push({ nama : "testing", umur : 12})
-    nb. cari tau tentang trackby
 -->
