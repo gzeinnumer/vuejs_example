@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+    <title>Part 8 - Method</title>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
-    <!-- CARA 1 -->
-    <!-- <div id="app">
-        {{ nama }} - {{ umur }}
+    <div id="app">
+        <button v-on:click="onBtnClicked">Button1</button>
+        <br>
+        <button v-on:click="onBtnClickedParams('pesan nih')">Button2</button>
+        <br>
+        <input type="text" v-on:keyup.13="enterAction"> <!-- 13 bisa diganti dengan enter -->
+        <!-- menhilangkan sifat reload page pada tag html kita bisa pakai v-on:click.prevent -->
+        <a href="" v-on:click.prevent="enterAction">mencegah href melakukan loading page</a>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-        new Vue({
+        var vo = new Vue({
             el : '#app',
             data : {
-                nama : "Zein",
-                umur : 100
-            }    
-        });
-    </script> -->
-    
-    <!-- CARA 2 -->
-    <div id="app">
-        {{ nama }} - {{ umur }}
-    </div>
 
-    <script>
-        var myData = {
-            nama : "Zein",
-            umur : 1000
-        }
-        new Vue({
-            el : '#app',
-            data : myData
+            },
+            methods: {
+                onBtnClicked: function(){
+                    console.log('btn clicked')
+                    alert('clicked')
+                },
+                onBtnClickedParams: function(text){
+                    console.log(text)
+                    alert(text)
+                },
+                enterAction : function(){
+                    console.log('enter ditekan')
+                    alert('enter ditekan')
+                }
+            },
         });
     </script>
 </body>
