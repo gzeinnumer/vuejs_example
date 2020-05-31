@@ -13,17 +13,22 @@
         <button v-on:click="onBtnClicked">Button1</button>
         <br>
         <button v-on:click="onBtnClickedParams('pesan nih')">Button2</button>
+        <button @click="onBtnClickedParams('pesan nih')">Button2.1</button>
         <br>
         <input type="text" v-on:keyup.13="enterAction"> <!-- 13 bisa diganti dengan enter -->
-        <!-- menhilangkan sifat reload page pada tag html kita bisa pakai v-on:click.prevent -->
-        <a href="" v-on:click.prevent="enterAction">mencegah href melakukan loading page</a>
+        <a v-bind:href="url_google" v-on:click="enterAction">link ke google</a>
+        <a :href="url_google" v-on:click="enterAction">link ke google2</a>
+        <br>
+        <img v-bind="{ id: 'gambar', src:'https://media.suara.com/pictures/653x366/2019/12/26/49091-gambar.jpg'}">
+        <br>
+        <img id='gambar' src='https://media.suara.com/pictures/653x366/2019/12/26/49091-gambar.jpg'>
     </div>
 
     <script>
         var vo = new Vue({
             el : '#app',
             data : {
-
+                url_google : 'http://google.com'
             },
             methods: {
                 onBtnClicked: function(){
@@ -43,3 +48,8 @@
     </script>
 </body>
 </html>
+
+<!-- 
+    v-on:click bisa diganti dengan @click 
+    v-bind:href bisa diganti dengan :href
+-->
