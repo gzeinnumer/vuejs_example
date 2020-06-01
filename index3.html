@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 7 - Menggunakan filter array</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <!-- CARA 1 -->
+    <div id="app">
+        <h2>Search</h2>
+        <input type="text" placeholder="Type a name" v-model="key">
+        <ul>
+            <li v-for="d in filteredPhotoFeed">
+                {{ d.nama }} - {{ d.umur}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var vo = new Vue({
+            el : '#app',
+            data : {
+                key: "",
+                members : [
+                    { nama : "m", umur : 23 },
+                    { nama : "fadli", umur : 24 },
+                    { nama : "zein", umur : 25 },
+                ],
+            },
+            computed: {
+                filteredPhotoFeed: function () {
+                    var data = this.members;
+                    var q = this.key;
+                    if(!q){
+                        return data;
+                    }
+                    searchString = q.trim().toLowerCase();
+                    data = data.filter(function(item){
+                        if(item.nama.toLowerCase().indexOf(q) !== -1){
+                            return item;
+                        }
+                    })
+                    return data;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
