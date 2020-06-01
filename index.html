@@ -6,18 +6,60 @@
     <title>Part 12 - Dynamic Component</title>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .fade-transition{
+            transition: opacity .5s ease;
+        }
+        .fade-enter, .fade-leave{
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
 
     <div id="app">
-        
+        <ul>
+            <li><a href="#" @click="currentView='home'">Home</a></li>
+            <li><a href="#" @click="currentView='member'">Members</a></li>
+        </ul>
+        <!-- agar tidak ada load baru di web, gunakan keep-alive suma sistem membuatkan cache untuk load lebih cepat -->
+        <!-- kalau mau menggunakan funcation transisi bisa menggunakan transision yang di buat dulu di style css -->
+        <component :is="currentView" keep-alive transition="fade" transition-mode="out-in"></component>
     </div>
 
+    <template id="home-template">
+        <div>
+            <h1>Selamat datang</h1>
+        </div>
+    </template>
+
+    <template id="member-template">
+        <div>
+            <input type="text" v-model="search">
+            <ul>
+                <li v-for="d in members | filterBy search"> {{ d }}</li>
+            </ul>
+        </div>
+    </template>
+
     <script>
+        Vue.component('home',{
+            template : '#home-template'
+        })
+        Vue.component('member',{
+            template : '#member-template',
+            data: function(){
+                return {
+                    members: [
+                        'M', 'Fadli', 'Zein'
+                    ]
+                }
+            }
+        })
         var vo = new Vue({
             el : '#app',
             data : {
-            
+                currentView : "home"
             },
         })
     </script>
