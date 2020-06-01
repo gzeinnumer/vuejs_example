@@ -10,46 +10,83 @@
 <body>
 
     <div id="app">
-        <button v-on:click="onBtnClicked">Button1</button>
-        <br>
-        <button v-on:click="onBtnClickedParams('pesan nih')">Button2</button>
-        <button @click="onBtnClickedParams('pesan nih')">Button2.1</button>
-        <br>
-        <input type="text" v-on:keyup.13="enterAction"> <!-- 13 bisa diganti dengan enter -->
-        <a v-bind:href="url_google" v-on:click="enterAction">link ke google</a>
-        <a :href="url_google" v-on:click="enterAction">link ke google2</a>
-        <br>
-        <img v-bind="{ id: 'gambar', src:'https://media.suara.com/pictures/653x366/2019/12/26/49091-gambar.jpg'}">
-        <br>
-        <img id='gambar' src='https://media.suara.com/pictures/653x366/2019/12/26/49091-gambar.jpg'>
+        <!-- cara 1 -->
+        <template-baru>
+        </template-baru>
+        
+        <!-- cara 2 -->
+        <template-baru2>
+        </template-baru2>
+        
+        <!-- cara 3 -->
+        <template-baru3>
+        </template-baru3>
+        
+        <!-- cara 4 -->
+        <template-baru4 message1="pesan nih">  
+        </template-baru4>
+        
+        <!-- cara 5 -->
+        <template-baru5 v-bind:name="nama" v-bind:umur="umur">  
+        </template-baru5>
+        <template-baru5 :name="nama" :umur="umur">  
+        </template-baru5>
     </div>
 
+    <!-- cara 3 -->
+    <template id="template-baru3-id">
+        <h1>GZeinNumer Template3</h1>
+    </template>
+
+    <!-- cara 4 -->
+    <template id="template-baru4-id">
+        <h1>GZeinNumer Template4 {{ message1 }}</h1>
+    </template>
+
+    <!-- cara 5 -->
+    <template id="template-baru5-id">
+        <h1>GZeinNumer Template5 {{ name }} - {{ umur }}</h1>
+    </template>
+
     <script>
+        // cara 1
+        var templateBaru = Vue.extend({
+            template: "<h1>GZeinNumer Template1</h1>"
+        })
+        Vue.component('template-baru', templateBaru)
+
+        // cara 2
+        Vue.component('template-baru2', {
+            template: "<h1>GZeinNumer Template2</h1>"
+        })
+
+        //cara 3
+        Vue.component('template-baru3', {
+            template: "#template-baru3-id"
+        })
+
+        //cara 4
+        Vue.component('template-baru4', {
+            template: "#template-baru4-id",
+            props : ['message1']
+        })
+
+        //cara 4
+        Vue.component('template-baru5', {
+            template: "#template-baru5-id",
+            props : ['name', 'umur']
+        })
+
+        //cara 5
         var vo = new Vue({
             el : '#app',
             data : {
-                url_google : 'http://google.com'
+                nama : "zein",
+                umur : 23
             },
-            methods: {
-                onBtnClicked: function(){
-                    console.log('btn clicked')
-                    alert('clicked')
-                },
-                onBtnClickedParams: function(text){
-                    console.log(text)
-                    alert(text)
-                },
-                enterAction : function(){
-                    console.log('enter ditekan')
-                    alert('enter ditekan')
-                }
-            },
-        });
+        })
     </script>
 </body>
 </html>
 
-<!-- 
-    v-on:click bisa diganti dengan @click 
-    v-bind:href bisa diganti dengan :href
--->
+
