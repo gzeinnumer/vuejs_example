@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 7 - Menggunakan filter error</title>
+    <title>Part 7 - Menggunakan filter </title>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
@@ -11,22 +11,179 @@
 
     <!-- CARA 1 -->
     <div id="app">
+        <h2>Capitalize</h2>
         <ul>
             <li v-for="d in members">
-                {{ d.nama }} - {{ d.umur}}
+                {{ d.nama | capitalize}} - {{ d.umur}}
             </li>
         </ul>
+
+        <h2>Reverse</h2>
+        <ul>
+            <li v-for="d in members">
+                {{ d.nama | reverse }} - {{ d.nama | reverse | capitalize}} - {{ d.umur}}
+            </li>
+        </ul>
+
+        <h2>Wrap -> error</h2>
+        <ul>
+            <li v-for="d in members">
+                {{ d.nama | wrap 'a' 'A' }} - {{ d.umur}}
+            </li>
+        </ul>
+
+        <h2>Readmore</h2>
+        <span>{{ text | readMore(10, '...') }}</span>
+
+        <h2>Mata uang</h2>
+        <span>{{ price | toFixed(2) | toUSD }}</span>
+
+        <h2>JSON</h2>
+        <span>{{ user | json }}</span>
+
+        <h2>Pluck</h2>
+        <span>{{ users | pluck('last_name') }}</span>
+        <span>{{ members | pluck('umur') }}</span>
+
+        <h2>at By index -> array get index 1</h2>
+        <span>{{ consoles | at(1) }}</span>
+
+        <h2>Mim</h2>
+        <span>{{ ages | min }}</span>
+
+        <h2>Shuffle array</h2>
+        <span>{{ consoles | shuffle }}</span>
+
+        <h2>Get index 0</h2>
+        <span>{{ consoles | first }}</span>
+
+        <h2>get index last</h2>
+        <span>{{ consoles | last }}</span>
+
+        <h2>Without -> array tampa</h2>
+        <span>{{ consoles | without('PlayStation') }}</span>
+
+        <h2>Unique</h2>
+        <span>{{ ages | unique }}</span>
+
+        <h2>Prepend -> tambahkan text setelah index akhir</h2>
+        <span>{{ greeting | prepend(' World!') }}</span>
+
+        <h2>Repeat</h2>
+        <span>{{ greeting | repeat(3) }}</span>
     </div>
 
     <script>
+        Vue.filter('capitalize', function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        })
+        Vue.filter('reverse', function (value) {
+            return value.split('').reverse().join('')
+        })
+        Vue.filter('wrap', function (value, begin, end) {
+            return begin + value + end
+        })
+        Vue.filter('readMore', function (text, length, suffix) {
+            return text.substring(0, length) + suffix;
+        });
+        // 
+        Vue.filter('toFixed', function (price, limit) {
+            return price.toFixed(limit);
+        });
+        Vue.filter('toUSD', function (price) {
+            return `$${price}`;
+        });
+        // 
+        Vue.filter('json', function (value) {
+            return JSON.stringify(value);
+        });
+        Vue.filter('pluck', function (objects, key) {
+            return objects.map(function(object) { 
+                return object[key];
+            });
+        });
+        Vue.filter('at', function (value, index) {
+            return value[index];
+        });
+        Vue.filter('min', function (values) {
+            return Math.min(...values);
+        });
+        Vue.filter('shuffle', function (values) {
+            for (var i = values.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = values[i];
+                values[i] = values[j];
+                values[j] = temp;
+            }
+            return values;
+        });
+        Vue.filter('first', function (values) {
+            if(Array.isArray(values)) {
+                return values[0];
+            }
+            return values;
+        });
+        Vue.filter('last', function (values) {
+            if(Array.isArray(values)) {
+                return values[values.length - 1];
+            }
+            return values;
+        });
+        Vue.filter('without', function (values, exclude) {
+            return values.filter(function(element) {
+                return !exclude.includes(element);
+            });
+        });
+        Vue.filter('unique', function (values, unique) {
+            return values.filter(function(element, index, self) {
+                return index == self.indexOf(element);
+            });
+        });
+        Vue.filter('prepend', function (string, prepend) {
+            return `${string}${prepend}`;
+        });
+        Vue.filter('repeat', function (string, times) {
+            return string.repeat(times);
+        });
+
         var vo = new Vue({
             el : '#app',
             data : {
                 members : [
-                    { nama : "M", umur : 23 },
-                    { nama : "Fadli", umur : 24 },
-                    { nama : "Zein", umur : 25 },
-                ]
+                    { nama : "m", umur : 23 },
+                    { nama : "fadli", umur : 24 },
+                    { nama : "zein", umur : 25 },
+                ],
+                msg : '',
+                text : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non ab mod',
+                price: 435.333,
+                user: {
+                    username: 'gzeinnumer',
+                    email: 'gzeinnumer@gmail.com',
+                    countryCode: 'I.D.'
+                },
+                users: [
+                    {
+                        "id": 4,
+                        "first_name": "Eve",
+                        "last_name": "Holt"
+                    },
+                    {
+                        "id": 5,
+                        "first_name": "Charles",
+                        "last_name": "Morris"
+                    },
+                    {
+                        "id": 6,
+                        "first_name": "Tracey",
+                        "last_name": "Ramos"
+                    }
+                ],
+                ages: [23, 19, 45, 12, 32, 19, 34, 12],
+                consoles: ['PlayStation', 'Nintendo DS', 'Xbox', 'Atari'],
+                greeting: 'GZeinNumer '
             }
         });
     </script>
