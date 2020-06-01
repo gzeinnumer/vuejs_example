@@ -3,46 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 8 - Method</title>
+    <title>Part 10 - V-Model sudah tidak bisa dipakai</title>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
     <div id="app">
-        <button v-on:click="onBtnClicked">Button1</button>
-        <br>
-        <button v-on:click="onBtnClickedParams('pesan nih')">Button2</button>
-        <button @click="onBtnClickedParams('pesan nih')">Button2.1</button>
-        <br>
-        <input type="text" v-on:keyup.13="enterAction"> <!-- 13 bisa diganti dengan enter -->
-        <a v-bind:href="url_google" v-on:click="enterAction">link ke google</a>
-        <a :href="url_google" v-on:click="enterAction">link ke google2</a>
-        <br>
-        <img v-bind="{ id: 'gambar', src:'https://media.suara.com/pictures/653x366/2019/12/26/49091-gambar.jpg'}">
-        <br>
-        <img id='gambar' src='https://media.suara.com/pictures/653x366/2019/12/26/49091-gambar.jpg'>
     </div>
 
     <script>
         var vo = new Vue({
             el : '#app',
             data : {
-                url_google : 'http://google.com'
-            },
-            methods: {
-                onBtnClicked: function(){
-                    console.log('btn clicked')
-                    alert('clicked')
-                },
-                onBtnClickedParams: function(text){
-                    console.log(text)
-                    alert(text)
-                },
-                enterAction : function(){
-                    console.log('enter ditekan')
-                    alert('enter ditekan')
-                }
             },
         });
     </script>
