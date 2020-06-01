@@ -3,86 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 8 - Method</title>
+    <title>Part 12 - Dynamic Component</title>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
     <div id="app">
-        <!-- cara 1 -->
-        <template-baru>
-        </template-baru>
         
-        <!-- cara 2 -->
-        <template-baru2>
-        </template-baru2>
-        
-        <!-- cara 3 -->
-        <template-baru3>
-        </template-baru3>
-        
-        <!-- cara 4 -->
-        <template-baru4 message1="pesan nih">  
-        </template-baru4>
-        
-        <!-- cara 5 -->
-        <template-baru5 v-bind:name="nama" v-bind:umur="umur">  
-        </template-baru5>
-        <template-baru5 :name="nama" :umur="umur">  
-        </template-baru5>
     </div>
 
-    <!-- cara 3 -->
-    <template id="template-baru3-id">
-        <h1>GZeinNumer Template3</h1>
-    </template>
-
-    <!-- cara 4 -->
-    <template id="template-baru4-id">
-        <h1>GZeinNumer Template4 {{ message1 }}</h1>
-    </template>
-
-    <!-- cara 5 -->
-    <template id="template-baru5-id">
-        <h1>GZeinNumer Template5 {{ name }} - {{ umur }}</h1>
-    </template>
-
     <script>
-        // cara 1
-        var templateBaru = Vue.extend({
-            template: "<h1>GZeinNumer Template1</h1>"
-        })
-        Vue.component('template-baru', templateBaru)
-
-        // cara 2
-        Vue.component('template-baru2', {
-            template: "<h1>GZeinNumer Template2</h1>"
-        })
-
-        //cara 3
-        Vue.component('template-baru3', {
-            template: "#template-baru3-id"
-        })
-
-        //cara 4
-        Vue.component('template-baru4', {
-            template: "#template-baru4-id",
-            props : ['message1']
-        })
-
-        //cara 4
-        Vue.component('template-baru5', {
-            template: "#template-baru5-id",
-            props : ['name', 'umur']
-        })
-
-        //cara 5
         var vo = new Vue({
             el : '#app',
             data : {
-                nama : "zein",
-                umur : 23
+            
             },
         })
     </script>
