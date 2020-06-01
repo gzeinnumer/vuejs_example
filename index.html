@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 10 - V-Model sudah tidak bisa dipakai</title>
+    <title>Part 10 - V-Model</title>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
     <div id="app">
+        <input type="text" v-model="texty">
+        <p>{{ texty }}</p>
     </div>
 
     <script>
         var vo = new Vue({
             el : '#app',
             data : {
+                texty : ''
             },
         });
     </script>
 </body>
 </html>
-
-<!-- 
-    v-on:click bisa diganti dengan @click 
-    v-bind:href bisa diganti dengan :href
--->
